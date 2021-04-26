@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Produto</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <ul>
+                <li><h:commandButton action = "index?faces-redirect=true" value = "Cadastro" /></li>
+                <li><h:commandButton action = "consultaProduto?faces-redirect=true" value = "Consultas" /></li>
+            </ul>
+        </h:form>
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputLabel>Informe a Descrição</h:outputLabel>
+                <h:inputText value="#{beanProduto.descricao}" />
+                <h:commandButton value="Pesquisar" action="#{beanProduto.consultar()}" />
+            </h:panelGrid>
+            
+            <h:panelGroup layout="block">
+                <h:selectBooleanCheckbox value="#{beanProduto.isFiltrarCategoria}" />
+                <h:outputLabel >Filtrar por categoria?</h:outputLabel>                                
+                <h:selectOneMenu value = "#{beanProduto.categoria}"> 
+                    <f:selectItem itemValue = "Cereais" itemLabel = "Cereais" /> 
+                    <f:selectItem itemValue = "Bebida" itemLabel = "Bebidas" /> 
+                    <f:selectItem itemValue = "Laticínios" itemLabel = "Laticínios" />
+                    <f:selectItem itemValue = "Condimentos" itemLabel = "Condimentos" />
+                    <f:selectItem itemValue = "Material de Limpeza" itemLabel = "Material de Limpeza" />
+                    <f:selectItem itemValue = "Frutas" itemLabel = "Frutas" />
+                    <f:selectItem itemValue = "Verduras" itemLabel = "Verduras" />                     
+                </h:selectOneMenu> 
+                <h:commandButton value="Pesquisar" action="#{beanProduto.consultarCategoria()}" />
+            </h:panelGroup>
+            
+            <h:dataTable var="ct" value="#{beanProduto.lista}">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputLabel value="#{ct.idproduto}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    <h:outputLabel value="#{ct.descricao}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Categoria</f:facet>
+                    <h:outputLabel value="#{ct.categoria}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Preço</f:facet>
+                    <h:outputLabel value="#{ct.preco}" />
+                </h:column>  
+                <h:column>
+                    <f:facet name="header">Estoque</f:facet>
+                    <h:outputLabel value="#{ct.qtdestoque}" />
+                </h:column> 
+                <h:column>
+                    <f:facet name="header">Observação</f:facet>
+                    <h:outputLabel value="#{ct.observacao}" />
+                </h:column> 
+                <h:column>
+                    <button  onclick="#{beanProduto.redirectEditar(ct.idproduto)}">Editar</button>
+                </h:column>
+            </h:dataTable>
+            
+            
+            
+            <br/>
+            <h:outputLabel>Para editar coloque o ID do produto</h:outputLabel>
+            <h:inputText value="#{beanProduto.idproduto}" />
+            <h:commandButton value="Editar" action="#{beanProduto.redirectEditar(ct.idproduto)}"/>
+        </h:form>
+    </h:body>
+</html>
+
+

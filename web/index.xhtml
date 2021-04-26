@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <ul>
+                <li><h:commandButton action = "index?faces-redirect=true" value = "Cadastro" /></li>
+                <li><h:commandButton action = "consultaProduto?faces-redirect=true" value = "Consultas" /></li>
+            </ul>
+        </h:form>
+        <h:form>
+         
+            <h:panelGrid columns="2">
+                <h:outputLabel>Descrição</h:outputLabel>
+                <h:inputText value="#{beanProduto.descricao}" />
+
+                <h:outputLabel>Categoria</h:outputLabel>
+                <h:selectOneMenu value = "#{beanProduto.categoria}"> 
+                     <f:selectItem itemValue = "Cereais" itemLabel = "Cereais" /> 
+                     <f:selectItem itemValue = "Bebida" itemLabel = "Bebidas" /> 
+                     <f:selectItem itemValue = "Laticínios" itemLabel = "Laticínios" />
+                     <f:selectItem itemValue = "Condimentos" itemLabel = "Condimentos" />
+                     <f:selectItem itemValue = "Material de Limpeza" itemLabel = "Material de Limpeza" />
+                     <f:selectItem itemValue = "Frutas" itemLabel = "Frutas" />
+                     <f:selectItem itemValue = "Verduras" itemLabel = "Verduras" />                     
+                </h:selectOneMenu> 	
+
+                <h:outputLabel>Preço</h:outputLabel>
+                <h:inputText value="#{beanProduto.preco}" />
+                
+                <h:outputLabel>Quantidade em estoque</h:outputLabel>
+                <h:inputText value="#{beanProduto.qtdestoque}" />
+                
+                <h:outputLabel>Observação</h:outputLabel>
+                <h:inputText value="#{beanProduto.observacao}" />
+
+                <h:commandButton value="Salvar" action="#{beanProduto.salvar()}" /> 
+                
+                <h:messages></h:messages>
+                
+            </h:panelGrid>
+        </h:form>
+
+    </h:body>
+</html>
